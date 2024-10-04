@@ -12,7 +12,7 @@ function BestSeller() {
             const bestProduct = products.filter((item) => item.bestseller);
             setBestSeller(bestProduct.slice(0, 5));
         }
-    }, []);
+    }, [products]);
 
     return (
         <div className="my-10">
@@ -29,7 +29,7 @@ function BestSeller() {
                     <ProductItem
                         key={item._id}
                         id={item._id}
-                        image={item.image}
+                        images={item.images}
                         name={item.name}
                         price={item.price}
                     />

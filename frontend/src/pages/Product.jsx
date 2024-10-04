@@ -15,7 +15,7 @@ function Product() {
         products.forEach((item) => {
             if (item._id === productId) {
                 setProductData(item);
-                setImage(item.image[0]);
+                setImage(item.images[0]);
             }
         });
     }
@@ -33,7 +33,7 @@ function Product() {
                 {/* Product Images */}
                 <div className="flex-1 flex flex-col-reverse sm:flex-row gap-3">
                     <div className="flex flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full">
-                        {productData.image.map((item, index) => (
+                        {productData.images.map((item, index) => (
                             <img
                                 src={item}
                                 key={index}

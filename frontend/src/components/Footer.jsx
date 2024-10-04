@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { assets } from '../frontend_assets/assets'
+import { ShopContext } from '../context/ShopContext'
 
 function Footer() {
+
+    const { token } = useContext(ShopContext)
+
     return (
-        <>
+        token && <>
             <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
                 <div>
                     <img className='mb-5 w-52' src={assets.logo} alt="logo" />

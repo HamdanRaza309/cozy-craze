@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ShopContext } from '../context/ShopContext';
+import axios from 'axios';
 
 function Login() {
-    const [currentState, setCurrentState] = useState('Sign Up');
+    const [currentState, setCurrentState] = useState('Log In');
     const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+    const { token, setToken, navigate, backendUrl } = useContext(ShopContext)
 
     const onChangeHandler = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,17 +18,43 @@ function Login() {
 
         try {
             if (currentState === 'Sign Up') {
-                console.log('Signing up with:', formData);
-                toast.success('Signed up successfully!');
-                setFormData({ name: '', email: '', password: '' })
+
+                const response = await axios.post(backendUrl + 'api/user/register',
+                    { name: formData.name, email: formData.email, password: formData.password }
+                )
+
+                if (response.data.success) {
+                    setToken(response.data.token)
+                    localStorage.setItem('token', token)
+                    setFormData({ name: '', email: '', password: '' })
+                } else {
+                    toast.error(response.data.message);
+                }
+
             } else {
-                console.log('Logging in with:', { email: formData.email, password: formData.password });
-                toast.success('Logged in successfully!');
+                const response = await axios.post(backendUrl + 'api/user/login',
+                    { email: formData.email, password: formData.password }
+                )
+
+                if (response.data.success) {
+                    setToken(response.data.token)
+                    localStorage.setItem('token', token)
+                    setFormData({ name: '', email: '', password: '' })
+                } else {
+                    toast.error(response.data.message);
+                }
             }
         } catch (error) {
-            toast.error('Something went wrong, please try again.');
+            console.log(error);
+            toast.error(error.message);
         }
     };
+
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, [token])
 
     return (
         <div>

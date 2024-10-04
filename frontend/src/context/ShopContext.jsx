@@ -35,7 +35,6 @@ const ShopContextProvider = ({ children }) => {
             cartData[itemId][productSize] = 1;
         }
 
-        // console.log(cartData);
         setCartItems(cartData);
     };
 
@@ -43,11 +42,9 @@ const ShopContextProvider = ({ children }) => {
         let totalCount = 0;
         for (const items in cartItems) {
             for (const item in cartItems[items]) {
-                // console.log('cartItems[items]', cartItems[items]);
                 try {
                     if (cartItems[items][item] > 0) {
                         totalCount += cartItems[items][item];
-                        // console.log('cartItems[items][item]', cartItems[items][item]);
                     }
                 } catch (error) {
                     console.error("Error counting cart items:", error);
@@ -76,7 +73,6 @@ const ShopContextProvider = ({ children }) => {
             }
         }
 
-        // console.log(totalAmount);
         return totalAmount;
     }
 
@@ -99,6 +95,12 @@ const ShopContextProvider = ({ children }) => {
         getProductsData()
     }, [])
 
+    useEffect(() => {
+        if (!token && localStorage.getItem('token')) {
+            setToken(localStorage.getItem('token'))
+        }
+    }, [])
+
     const value = {
         products,
         currency,
@@ -108,6 +110,7 @@ const ShopContextProvider = ({ children }) => {
         showSearch,
         setShowSearch,
         cartItems,
+        setCartItems,
         addToCart,
         getCartCount,
         updateQuantity,

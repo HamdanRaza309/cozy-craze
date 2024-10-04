@@ -13,8 +13,8 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    image: {
-        type: Array,
+    images: {
+        type: [String],
         required: true,
     },
     category: {
@@ -38,6 +38,6 @@ const productSchema = new mongoose.Schema({
     }
 })
 
-const productModel = mongoose.model.product || mongoose.model('product', productSchema)
+const productModel = mongoose.models.product || mongoose.model('product', productSchema)
 
 export default productModel;

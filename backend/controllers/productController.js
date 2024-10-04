@@ -3,22 +3,43 @@ import productModel from "../models/productModel.js";
 // add product
 const addProduct = async (req, res) => {
     try {
+        // Log req.files to check if files are coming in
+        console.log("Received Files: ", req.files);
+
         const { name, description, price, category, subCategory, sizes, bestseller } = req.body;
+
+        // Process images if they exist in the request
         const image1 = req.files.image1 && req.files.image1[0];
         const image2 = req.files.image2 && req.files.image2[0];
         const image3 = req.files.image3 && req.files.image3[0];
         const image4 = req.files.image4 && req.files.image4[0];
 
-        const images = [image1, image2, image3, image4].filter((image) => (
-            image !== undefined
-        ))
+        // Log individual image to check if they are correctly identified
+        console.log("Image 1: ", image1);
+        console.log("Image 2: ", image2);
+        console.log("Image 3: ", image3);
+        console.log("Image 4: ", image4);
 
-        let imagesUrl = await Promise.all(
-            images.map(async (item) => {
-                let result = await cloudinary.uploader.upload(item.path, { resource_type: 'image' });
-                return result.secure_url;
-            })
-        )
+        const images = [image1, image2, image3, image4].filter(image => image !== undefined);
+
+        let imagesUrl = [];
+
+        // Check if images exist, then upload to Cloudinary
+        if (images.length > 0) {
+            imagesUrl = await Promise.all(
+                images.map(async (item) => {
+                    console.log("Uploading image to Cloudinary: ", item.path);
+                    let result = await cloudinary.uploader.upload(item.path, {
+                        resource_type: 'image',
+                    });
+                    console.log("Uploaded image URL: ", result.secure_url);
+                    return result.secure_url;
+                })
+            );
+        }
+
+        // Log the collected URLs to make sure they're being captured
+        console.log("Image URLs: ", imagesUrl);
 
         const productData = {
             name,
@@ -26,22 +47,25 @@ const addProduct = async (req, res) => {
             price: Number(price),
             category,
             subCategory,
-            sizes: JSON.parse(sizes),
+            sizes,
             bestseller: bestseller === "true" ? true : false,
             images: imagesUrl,
-            date: Date.now()
-        }
-        console.log(productData);
+            date: Date.now(),
+        };
 
-        const product = new productModel(productData)
+        console.log("Product Data: ", productData); // For debugging
+
+        // Create and save the product to the database
+        const product = new productModel(productData);
         await product.save();
 
-        res.json({ success: true, message: 'Product Added' })
-
+        res.json({ success: true, message: 'Product Added', product });
     } catch (error) {
-        res.json({ success: false, message: error.message })
+        console.error("Error adding product: ", error);
+        res.status(500).json({ success: false, message: error.message });
     }
-}
+};
+
 
 // list products
 const listProducts = async (req, res) => {

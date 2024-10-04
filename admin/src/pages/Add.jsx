@@ -6,10 +6,10 @@ import { toast } from 'react-toastify';
 
 function add({ token }) {
 
-    const [image1, setImage1] = useState(null);
-    const [image2, setImage2] = useState(null);
-    const [image3, setImage3] = useState(null);
-    const [image4, setImage4] = useState(null);
+    const [image1, setImage1] = useState(false);
+    const [image2, setImage2] = useState(false);
+    const [image3, setImage3] = useState(false);
+    const [image4, setImage4] = useState(false);
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -41,12 +41,20 @@ function add({ token }) {
             const response = await axios.post(`${backendUrl}api/product/add`, formData, {
                 headers: {
                     token,
-                    // 'Content-Type': 'multipart/form-data',  // Ensure correct content type for file uploads
+                    // 'Content-Type': 'multipart/form-data',
                 },
             });
 
             if (response.data.success) {
                 toast.success(response.data.message);
+                console.log(response);
+                setImage1(false)
+                setImage2(false)
+                setImage3(false)
+                setImage4(false)
+                setName('')
+                setDescription('')
+                setPrice('')
             }
         } catch (error) {
             console.error(error);

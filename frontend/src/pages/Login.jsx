@@ -24,7 +24,7 @@ function Login() {
                 )
 
                 if (response.data.success) {
-                    let t = response.data.token
+                    let t = await response.data.token
                     setToken(t)
                     localStorage.setItem('token', response.data.token)
                     setFormData({ name: '', email: '', password: '' })
@@ -38,7 +38,7 @@ function Login() {
                 )
 
                 if (response.data.success) {
-                    let t = response.data.token
+                    let t = await response.data.token
                     setToken(t)
                     localStorage.setItem('token', response.data.token)
                     setFormData({ name: '', email: '', password: '' })

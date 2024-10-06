@@ -30,7 +30,9 @@ function add({ token }) {
             formData.append('category', category);
             formData.append('subCategory', subCategory);
             formData.append('bestseller', bestseller);
-            formData.append('sizes', sizes);
+            sizes.forEach(size => {
+                formData.append('sizes[]', size);
+            });
 
             // Ensure images are appended to formData if they exist
             if (image1) formData.append('image1', image1);

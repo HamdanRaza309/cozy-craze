@@ -24,8 +24,9 @@ function Login() {
                 )
 
                 if (response.data.success) {
-                    setToken(response.data.token)
-                    localStorage.setItem('token', token)
+                    let t = response.data.token
+                    setToken(t)
+                    localStorage.setItem('token', response.data.token)
                     setFormData({ name: '', email: '', password: '' })
                 } else {
                     toast.error(response.data.message);
@@ -37,8 +38,9 @@ function Login() {
                 )
 
                 if (response.data.success) {
-                    setToken(response.data.token)
-                    localStorage.setItem('token', token)
+                    let t = response.data.token
+                    setToken(t)
+                    localStorage.setItem('token', response.data.token)
                     setFormData({ name: '', email: '', password: '' })
                 } else {
                     toast.error(response.data.message);

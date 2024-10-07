@@ -48,22 +48,22 @@ const ShopContextProvider = ({ children }) => {
         }
     };
 
-    // const getCartCount = () => {
-    //     let totalCount = 0;
-    //     for (const items in cartItems) {
-    //         for (const item in cartItems[items]) {
-    //             try {
-    //                 if (cartItems[items][item] > 0) {
-    //                     totalCount += cartItems[items][item];
-    //                 }
-    //             } catch (error) {
-    //                 console.error("Error counting cart items:", error);
-    //             }
-    //         }
-    //     }
+    const getCartCount = () => {
+        let totalCount = 0;
+        for (const items in cartItems) {
+            for (const item in cartItems[items]) {
+                try {
+                    if (cartItems[items][item] > 0) {
+                        totalCount += cartItems[items][item];
+                    }
+                } catch (error) {
+                    console.error("Error counting cart items:", error);
+                }
+            }
+        }
 
-    //     return totalCount;
-    // };
+        return totalCount;
+    };
 
     const updateQuantity = async (itemId, size, quantity) => {
         let cartData = structuredClone(cartItems);
@@ -83,19 +83,26 @@ const ShopContextProvider = ({ children }) => {
         }
     }
 
-    // const getCartAmount = () => {
-    //     let totalAmount = 0;
-    //     for (const items in cartItems) {
-    //         let itemInfo = products.find((product) => product._id === items);
-    //         for (const item in cartItems[items]) {
-    //             if (cartItems[items][item] > 0) {
-    //                 totalAmount += itemInfo.price * cartItems[items][item];
-    //             }
-    //         }
-    //     }
+    const getCartAmount = () => {
+        let totalAmount = 0;
+        for (const items in cartItems) {
+            let itemInfo = products.find((product) => product._id === items);
 
-    //     return totalAmount;
-    // }
+            // Ensure itemInfo exists before accessing its price
+            if (!itemInfo) {
+                continue;  // Skip this item if not found
+            }
+
+            for (const item in cartItems[items]) {
+                if (cartItems[items][item] > 0) {
+                    totalAmount += itemInfo.price * cartItems[items][item];
+                }
+            }
+        }
+
+        return totalAmount;
+    };
+
 
     const getProductsData = async () => {
         try {
@@ -148,9 +155,9 @@ const ShopContextProvider = ({ children }) => {
         cartItems,
         setCartItems,
         addToCart,
-        // getCartCount,
+        getCartCount,
         updateQuantity,
-        // getCartAmount,
+        getCartAmount,
         navigate,
         backendUrl,
         token,

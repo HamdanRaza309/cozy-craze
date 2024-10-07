@@ -66,12 +66,8 @@ function PlaceOrder() {
                         } else {
                             toast.error(response.data.message);
                         }
-                    } else {
-                        console.log('no token available');
                     }
                     break;
-
-                // Add other cases if needed
 
                 default:
                     toast.error('Invalid payment method');
@@ -79,7 +75,8 @@ function PlaceOrder() {
             }
 
         } catch (error) {
-
+            console.log(error);
+            toast.error(error.message)
         }
     }
 

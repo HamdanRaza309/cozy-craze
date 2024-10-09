@@ -19,6 +19,9 @@ app.use(express.json());
 app.use(cors());
 
 // api endpoints
+app.get('/', (req, res) => {
+    res.send('API is running...');
+});
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)

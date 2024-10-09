@@ -69,6 +69,20 @@ function PlaceOrder() {
                     }
                     break;
 
+                case 'stripe':
+                    if (token) {
+                        const response = await axios.post(`${backendUrl}api/order/stripe`, orderData, { headers: { token } });
+                        if (response.data.success) {
+                            const { session_url } = response.data
+                            window.location.replace(session_url)
+                            // setCartItems({});
+                            // navigate('/orders');
+                        } else {
+                            toast.error(response.data.message);
+                        }
+                    }
+                    break;
+
                 default:
                     toast.error('Invalid payment method');
                     break;

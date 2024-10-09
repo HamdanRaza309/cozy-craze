@@ -107,25 +107,46 @@ const placeOrderStripe = async (req, res) => {
     }
 };
 
-// verify stripe
 const verifyStripe = async (req, res) => {
     try {
-        const { orderId, success, userId } = req.body
+        const { orderId, success, userId } = req.body;
 
-        if (success === 'true') {
-            await orderModel.findByIdAndUpdate(orderId, { payment: true })
-            await userModel.findByIdAndUpdate(userId, { cartData: {} })
-            res.json({ success: true })
-        } else {
-            await orderModel.findByIdAndDelete(orderId)
-            res.json({ success: false })
+        if (!orderId || !userId) {
+            return res.status(400).json({ success: false, message: 'Missing orderId or userId' });
         }
 
+        // Check if the payment was successful
+        if (success == 'true' || success === true) {
+            const updatedOrder = await orderModel.findByIdAndUpdate(
+                orderId,
+                { payment: true },
+                { new: true }
+            );
+
+            if (!updatedOrder) {
+                return res.status(404).json({ success: false, message: 'Order not found' });
+            }
+
+            // Update user cart data
+            await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+            return res.json({ success: true, message: 'Payment verified and order updated', order: updatedOrder });
+        } else {
+            // If payment was not successful, delete the order
+            const deletedOrder = await orderModel.findByIdAndDelete(orderId);
+
+            if (!deletedOrder) {
+                return res.status(404).json({ success: false, message: 'Order not found for deletion' });
+            }
+
+            return res.json({ success: false, message: 'Payment failed, order deleted' });
+        }
     } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message })
+        console.error('Error verifying Stripe payment:', error);
+        return res.status(500).json({ success: false, message: error.message });
     }
-}
+};
+
 
 // placing order using razorpay method
 const placeOrderRazorpay = async (req, res) => {

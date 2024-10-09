@@ -75,11 +75,15 @@ function PlaceOrder() {
                         if (response.data.success) {
                             const { session_url } = response.data
                             window.location.replace(session_url)
-                            // setCartItems({});
-                            // navigate('/orders');
                         } else {
                             toast.error(response.data.message);
                         }
+                    }
+                    break;
+
+                case 'razorPay':
+                    if (token) {
+                        toast.info('Sorry, this method is not available yet')
                     }
                     break;
 

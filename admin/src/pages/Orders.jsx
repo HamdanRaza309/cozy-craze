@@ -10,8 +10,6 @@ function Orders({ token }) {
 
     const fetchAllOrders = async () => {
         if (!token) {
-            console.log('hi');
-
             return null
         }
 

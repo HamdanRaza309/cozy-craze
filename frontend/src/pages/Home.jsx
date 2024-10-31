@@ -4,12 +4,14 @@ import LatestCollection from '../components/LatestCollection';
 import BestSeller from '../components/BestSeller';
 import OurPolicy from '../components/OurPolicy';
 import NewsLetterBox from '../components/NewsLetterBox';
+import Achievements from '../components/Achievements';
 
 function Home() {
     return (
         <div>
             <Hero />
             <LatestCollection />
+            <Achievements />
             <BestSeller />
             <OurPolicy />
             <NewsLetterBox />

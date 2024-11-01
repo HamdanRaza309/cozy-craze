@@ -21,9 +21,9 @@ import VerifyPayment from './pages/VerifyPayment';
 const App = () => {
   return (
     <>
+      <ToastContainer />
+      <Navbar />
       <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
-        <ToastContainer />
-        <Navbar />
         <SearchBar />
         <Routes>
           <Route path='/' element={<Home />} />

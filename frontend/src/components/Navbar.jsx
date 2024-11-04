@@ -81,7 +81,7 @@ function Navbar() {
 
                 {/* Profile Dropdown */}
                 <div className="group relative">
-                    <img src={assets.profile_icon} alt="profile_icon" className='w-5 cursor-pointer' />
+                    <img src={assets.profile_icon} alt="profile_icon" className='w-5 cursor-pointer transition duration-300 hover:scale-110' />
                     <div className="hidden group-hover:flex flex-col absolute right-0 mt-2 w-36 bg-gray-100 p-3 text-gray-600 rounded-md shadow-lg">
                         <p className='cursor-pointer hover:text-black'>My Profile</p>
                         <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-black'>Orders</p>
@@ -90,7 +90,7 @@ function Navbar() {
                 </div>
 
                 {/* Cart Icon */}
-                <Link to='/cart' className={`relative w-5 cursor-pointer ${hoverTextColor}`}>
+                <Link to='/cart' className={`relative w-5 cursor-pointer ${hoverTextColor} transition duration-300 hover:scale-110`}>
                     <img src={assets.cart_icon} alt="cart_icon" />
                     <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>
                         {getCartCount()}

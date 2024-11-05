@@ -6,6 +6,7 @@ import ProductItem from '../components/ProductItem'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faStar } from '@fortawesome/free-solid-svg-icons';
+import SearchBar from '../components/SearchBar';
 
 function Collection() {
 
@@ -136,6 +137,9 @@ function Collection() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <SearchBar />
             </div>
 
             <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t">

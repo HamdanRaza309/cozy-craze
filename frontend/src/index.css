@@ -1,28 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-a.active hr{
-    display: block;
+a.active hr {
+  display: block;
 }
 
-*{
-    font-family: Outfit;
+* {
+  font-family: Outfit;
 }
 
 .prata-regular {
-    font-family: "Prata", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-::-webkit-scrollbar{
-    display: none;
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
 }
-  @media (max-width:640px) {
-    a.active{
-        background-color: black;
-        color: white;
-    }
+::-webkit-scrollbar {
+  display: none;
+}
+@media (max-width: 640px) {
+  a.active {
+    background-color: black;
+    color: white;
   }
+}
+
+/* button */
+.btnForWhiteBg {
+  padding: 12px 25px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background: #facc15;
+  border: 2px solid transparent;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 50px #facc15;
+  transition: ease-in 0.3s;
+}
+
+.btnForWhiteBg:hover {
+  color: #facc15;
+  background: transparent;
+  box-shadow: inset 0 0 0 0 #facc15;
+  border-color: #facc15;
+}
+
+.btnForRedBg {
+  padding: 12px 25px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #facc15;
+  background: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 0;
+  box-shadow: inset 0 0 0 50px #ffffff;
+  transition: ease-in 0.3s;
+}
+
+.btnForRedBg:hover {
+  color: #ffffff;
+  background: transparent;
+  box-shadow: inset 0 0 0 0 #ffffff;
+  border-color: #ffffff;
+}

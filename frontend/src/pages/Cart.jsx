@@ -78,7 +78,7 @@ function Cart() {
                         <div className="w-full text-end">
                             <button
                                 onClick={() => navigate('/place-order')}
-                                className='bg-black text-white my-8 px-8 py-3 text-sm active:bg-gray-700'
+                                className='my-1 btnForWhiteBg'
                             >
                                 PROCEED TO CHECKOUT
                             </button>

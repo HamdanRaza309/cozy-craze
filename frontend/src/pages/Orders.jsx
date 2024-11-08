@@ -65,7 +65,7 @@ function Orders() {
                                 <p className={`min-w-2 h-2 rounded-full bg-green-600`}></p>
                                 <p className='text-sm md:text-base font-semibold'>{item.status}</p>
                             </div>
-                            <button onClick={loadOrderData} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>
+                            <button onClick={loadOrderData} className='btnForWhiteBg'>
                                 Track Order
                             </button>
                         </div>

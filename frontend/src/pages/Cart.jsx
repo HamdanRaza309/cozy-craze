@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../context/ShopContext';
 import Title from "../components/Title";
-import { assets } from '../frontend_assets/assets';
 import CartTotal from '../components/CartTotal';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Cart() {
     const { products, currency, cartItems, updateQuantity, navigate } = useContext(ShopContext);
@@ -55,12 +56,12 @@ function Cart() {
                                     min={1}
                                     defaultValue={item.quantity}
                                 />
-                                <img
+                                <FontAwesomeIcon
                                     onClick={() => updateQuantity(item._id, item.size, 0)}
-                                    className='cursor-pointer w-4 sm:w-5 mr-4'
-                                    src={assets.bin_icon}
-                                    alt="bin_icon"
+                                    className='cursor-pointer w-4 sm:w-5 mr-4 text-gray-500 hover:text-red-500 transition-colors duration-200'
+                                    icon={faTrash}
                                 />
+
                             </div>
                         );
                     })

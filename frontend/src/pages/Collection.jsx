@@ -5,7 +5,7 @@ import Title from '../components/Title';
 import ProductItem from '../components/ProductItem'
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faStar, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import SearchBar from '../components/SearchBar';
 
 function Collection() {
@@ -147,7 +147,10 @@ function Collection() {
                 {/* Filter Options */}
                 <div className="min-w-60">
                     <p onClick={() => setShowFilter(!showFilter)} className='cursor-pointer gap-2 items-center my-2 text-xl'>FILTERS
-                        <img className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} src={assets.dropdown_icon} alt="dropdown_icon" />
+                        <FontAwesomeIcon
+                            className={`h-3 sm:hidden ${showFilter ? '-rotate-45' : ''}`}
+                            icon={faAngleDown}
+                        />
                     </p>
 
                     {/* Category Filters */}
@@ -184,11 +187,11 @@ function Collection() {
 
                 {/* Right Side */}
                 <div className="flex-1">
-                    <div className="flex justify-between text-base sm:text-2xl mb-4">
+                    <div className="flex flex-col sm:flex-row justify-between text-base sm:text-2xl mb-4">
                         <Title text1={'ALL'} text2={'COLLECTIONS'} />
 
                         {/* Product Sort */}
-                        <select onChange={(e) => setSortType(e.target.value)} className='border border-gray-300 text-sm px-2'>
+                        <select onChange={(e) => setSortType(e.target.value)} className="border border-gray-300 text-sm px-2 mt-2 sm:mt-0">
                             <option value="relevent">Sort by: Relevent</option>
                             <option value="low-high">Sort by: Low to High</option>
                             <option value="high-low">Sort by: High to Low</option>

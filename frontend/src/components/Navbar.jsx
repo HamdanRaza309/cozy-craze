@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { assets } from '../frontend_assets/assets';
 import { ShopContext } from '../context/ShopContext';
@@ -13,6 +13,8 @@ function Navbar() {
     const [hoverTextColor, setHoverTextColor] = useState('hover:text-yellow-500');
     const [height, setHeight] = useState('h-24');
     const [logo, setLogo] = useState(assets.logo1);
+    const [profileOpen, setProfileOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const logout = async () => {
         navigate('/login');
@@ -40,6 +42,17 @@ function Navbar() {
 
         window.addEventListener('scroll', handleScrollEvent);
         return () => window.removeEventListener('scroll', handleScrollEvent);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setProfileOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     return (
@@ -91,16 +104,23 @@ function Navbar() {
                 />
 
                 {/* Profile Dropdown */}
-                <div className="group relative">
+                <div className="relative" ref={dropdownRef}>
                     <FontAwesomeIcon
                         icon={faUser}
                         className={`text-2xl cursor-pointer ${hoverTextColor} transition duration-300 hover:scale-110`}
+                        onClick={() => setProfileOpen((prev) => !prev)}
                     />
-                    <div className="hidden group-hover:flex flex-col absolute right-0 mt-2 w-36 bg-white text-gray-700 p-3 rounded-md shadow-lg border">
-                        <p className='cursor-pointer hover:text-gray-900'>My Profile</p>
-                        <p onClick={() => navigate('/orders')} className='cursor-pointer hover:text-gray-900'>Orders</p>
-                        <p onClick={logout} className='cursor-pointer hover:text-gray-900'>Logout</p>
-                    </div>
+                    {profileOpen && (
+                        <div className="absolute right-0 mt-2 w-36 bg-white text-gray-700 p-3 rounded-md shadow-lg border">
+                            <p className="cursor-pointer hover:text-gray-900">My Profile</p>
+                            <p onClick={() => navigate('/orders')} className="cursor-pointer hover:text-gray-900">
+                                Orders
+                            </p>
+                            <p onClick={logout} className="cursor-pointer hover:text-gray-900">
+                                Logout
+                            </p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Cart Icon */}

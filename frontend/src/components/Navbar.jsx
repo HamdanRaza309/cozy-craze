@@ -55,15 +55,30 @@ function Navbar() {
 
             {/* Desktop Navigation */}
             <ul className="hidden md:flex gap-6 text-sm lg:text-base">
-                {['HOME', 'COLLECTION', 'ABOUT', 'CONTACT'].map((item) => (
-                    <NavLink
-                        key={item}
-                        to={`/${item.toLowerCase()}`}
-                        className={`transition duration-300 ${hoverTextColor} hover:underline hover:underline-offset-4`}
-                    >
-                        {item}
-                    </NavLink>
-                ))}
+                <NavLink
+                    to="/"
+                    className={`transition duration-300 ${hoverTextColor} hover:underline hover:underline-offset-4`}
+                >
+                    HOME
+                </NavLink>
+                <NavLink
+                    to="/collection"
+                    className={`transition duration-300 ${hoverTextColor} hover:underline hover:underline-offset-4`}
+                >
+                    COLLECTION
+                </NavLink>
+                <NavLink
+                    to="/about"
+                    className={`transition duration-300 ${hoverTextColor} hover:underline hover:underline-offset-4`}
+                >
+                    ABOUT
+                </NavLink>
+                <NavLink
+                    to="/contact"
+                    className={`transition duration-300 ${hoverTextColor} hover:underline hover:underline-offset-4`}
+                >
+                    CONTACT
+                </NavLink>
             </ul>
 
             {/* Icons and Menu for Mobile */}
@@ -120,16 +135,34 @@ function Navbar() {
                     </div>
 
                     {/* Sidebar Links */}
-                    {['HOME', 'COLLECTION', 'ABOUT', 'CONTACT'].map((item) => (
-                        <NavLink
-                            key={item}
-                            onClick={() => setVisible(false)}
-                            to={`/${item.toLowerCase()}`}
-                            className="py-4 px-6 text-lg border-b border-gray-200 hover:bg-gray-100"
-                        >
-                            {item}
-                        </NavLink>
-                    ))}
+                    <NavLink
+                        onClick={() => setVisible(false)}
+                        to="/"
+                        className="py-4 px-6 text-lg border-b border-gray-200 hover:bg-gray-100"
+                    >
+                        HOME
+                    </NavLink>
+                    <NavLink
+                        onClick={() => setVisible(false)}
+                        to="/collection"
+                        className="py-4 px-6 text-lg border-b border-gray-200 hover:bg-gray-100"
+                    >
+                        COLLECTION
+                    </NavLink>
+                    <NavLink
+                        onClick={() => setVisible(false)}
+                        to="/about"
+                        className="py-4 px-6 text-lg border-b border-gray-200 hover:bg-gray-100"
+                    >
+                        ABOUT
+                    </NavLink>
+                    <NavLink
+                        onClick={() => setVisible(false)}
+                        to="/contact"
+                        className="py-4 px-6 text-lg border-b border-gray-200 hover:bg-gray-100"
+                    >
+                        CONTACT
+                    </NavLink>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@ import Achievements from '../components/Achievements';
 
 function Home() {
     return (
-        <div>
+        <div className='mt-2 md:mt-5'>
             <Hero />
             <LatestCollection />
             <Achievements />
